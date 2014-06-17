@@ -1,0 +1,24 @@
+#:import Factory kivy.factory.Factory
+
+<SlideMenuOption@SpinnerOption>:
+    height: app.font_size_regular * 2
+
+<SlideMenu>:
+    slide_spinner: slide_spinner
+    id: slide_menu
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: app.font_size_regular * 2
+    Button:
+        font_size: app.font_size_regular
+        text: '<<'
+        on_press: slide_menu.go_prev()
+    Spinner:
+        id: slide_spinner
+        option_cls: Factory.get("SlideMenuOption")
+        on_text: slide_menu.go_slide(self)
+    Button:
+        font_size: app.font_size_regular
+        text: '>>'
+        on_press: slide_menu.go_next()
+

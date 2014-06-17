@@ -1,0 +1,16 @@
+<Label>:
+    font_size: app.font_size_regular
+    halign: 'center'
+    text_size: self.width, None
+
+<SlideTitleLabel@Label>:
+    color: 0.15,0.15,0.15,1
+    font_size: app.font_size_large
+    height: self.font_size * 2
+    size_hint_y: None
+    canvas.before:
+        Color:
+            rgba: 0.85,0.85,0.85,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
