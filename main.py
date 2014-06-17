@@ -24,7 +24,7 @@ __version__ = '0.1.3'
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "Pyjnius", "Pyobjus", 
           "Plyer"]
 for slide in slides:
-    Builder.load_file("slide_{}.kv".format(slide.lower()))
+    Builder.load_file("slides/{}.kv".format(slide.lower()))
 
 class TitleScreen(Screen):
     pass
