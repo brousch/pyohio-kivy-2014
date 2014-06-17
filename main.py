@@ -15,7 +15,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 
 
-__version__ = '0.1'
+__version__ = '0.1.3'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "Pyjnius", "Pyobjus", 

@@ -53,6 +53,7 @@ coverage.xml
 docs/_build/
 
 # Kivy
+.buildozer
 .kivy
 .launch
 .settings
