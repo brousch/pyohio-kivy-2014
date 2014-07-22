@@ -1,6 +1,8 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
+import os
+
 import kivy
 kivy.require('1.8.0')
 
@@ -21,13 +23,14 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "Pyjnius", "Pyobjus", 
           "Plyer", "KivyGarden", "KivyDesigner"]
 for slide in slides:
-    Builder.load_file("slides/{}.kv".format(slide.lower()))
+    kv_file = "{}.kv".format(slide.lower())
+    Builder.load_file(os.path.join("slides", kv_file))
 
 class TitleScreen(Screen):
     pass
@@ -147,6 +150,12 @@ class KivyPresApp(App):
 
     def build(self):
         return KivyPres()
+    
+    def on_pause(self):
+        return true
+        
+    def on_resume(self):
+        pass
 
 
 if __name__ == '__main__':
