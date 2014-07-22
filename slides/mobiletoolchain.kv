@@ -1,15 +1,48 @@
+#:import os os
+
+<Placeholder@Image>:
+    size: 100, 100
+    size_hint: None, None
+    source: os.path.join("images", "kivy-logo-black-256.png")
+
+<FloatingButton@Button>:
+    font_size: app.font_size_large
+    size_hint: None, None
+    height: app.font_size_large * 1.5
+    width: self.texture_size[0] + (app.font_size_large * 1.5)
+
 <MobileToolchainScreen>:
     BoxLayout:
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'Mobile Toolchain'
-        Label:
-            font_size: app.font_size_large
-            text: 'Android Toolchain'
-        Label:
-            text: 'Kivy -> python-for-android -> Buildozer -> [Hanga]'
-        Label:
-            font_size: app.font_size_large
-            text: 'iOS Toolchain'
-        Label:
-            text: 'Kivy -> python-ios -> (Buildozer) -> (Hanga)'
+        FloatLayout:
+            id: treelayout
+            Placeholder:
+                id: ph_kivy
+                center: treelayout.center_x, treelayout.top - self.height
+            Placeholder:
+                id: ph_py4a
+                center: treelayout.center_x / 2, (ph_kivy.center_y + ph_buildozer.center_y) / 2
+            Placeholder:
+                id: ph_kivyios
+                center: treelayout.center_x * 1.5, (ph_kivy.center_y + ph_buildozer.center_y) / 2
+            Placeholder:
+                id: ph_buildozer
+                center: treelayout.center_x, treelayout.center_y
+            Placeholder:
+                id: ph_pyjnius
+                center: treelayout.center_x / 2, (ph_buildozer.center_y + ph_plyer.center_y) / 2
+            Placeholder:
+                id: ph_pyobjus
+                center: treelayout.center_x * 1.5, (ph_buildozer.center_y + ph_plyer.center_y) / 2
+            Placeholder:
+                id: ph_plyer
+                center: treelayout.center_x, self.height
+            FloatingButton:
+                text: "kivy"
+                pos: 100,100
+            FloatingButton:
+                text: "python-for-android"
+                pos: 200,200
+

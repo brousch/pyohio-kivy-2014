@@ -9,6 +9,9 @@ Config.set('graphics', 'width', '1280')
 Config.set('graphics', 'height', '720')
 
 from kivy.app import App
+from kivy.clock import Clock
+from kivy.graphics import Color
+from kivy.graphics import Line
 from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import ObjectProperty
@@ -22,7 +25,7 @@ __version__ = '0.1.4'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "Pyjnius", "Pyobjus", 
-          "Plyer"]
+          "Plyer", "KivyGarden", "KivyDesigner"]
 for slide in slides:
     Builder.load_file("slides/{}.kv".format(slide.lower()))
 
@@ -33,7 +36,38 @@ class WhatIsKivyScreen(Screen):
     pass
 
 class MobileToolchainScreen(Screen):
-    pass
+    
+    def on_enter(self):
+        self._draw_tree()
+
+    def _draw_tree(self):
+        with self.ids.treelayout.canvas.before:
+            Color(1,1,1,1)
+            Line(points=[self.ids.ph_kivy.center_x, self.ids.ph_kivy.center_y, 
+                         self.ids.ph_py4a.center_x, self.ids.ph_py4a.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_kivy.center_x, self.ids.ph_kivy.center_y, 
+                         self.ids.ph_kivyios.center_x, self.ids.ph_kivyios.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_py4a.center_x, self.ids.ph_py4a.center_y, 
+                         self.ids.ph_buildozer.center_x, self.ids.ph_buildozer.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_kivyios.center_x, self.ids.ph_kivyios.center_y, 
+                         self.ids.ph_buildozer.center_x, self.ids.ph_buildozer.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_py4a.center_x, self.ids.ph_py4a.center_y, 
+                         self.ids.ph_pyjnius.center_x, self.ids.ph_pyjnius.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_kivyios.center_x, self.ids.ph_kivyios.center_y, 
+                         self.ids.ph_pyobjus.center_x, self.ids.ph_pyobjus.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_pyjnius.center_x, self.ids.ph_pyjnius.center_y, 
+                         self.ids.ph_plyer.center_x, self.ids.ph_plyer.center_y],
+                 width=5)
+            Line(points=[self.ids.ph_pyobjus.center_x, self.ids.ph_pyobjus.center_y, 
+                         self.ids.ph_plyer.center_x, self.ids.ph_plyer.center_y],
+                 width=5)
+
 
 class PyjniusScreen(Screen):
     pass
@@ -42,6 +76,12 @@ class PyobjusScreen(Screen):
     pass
 
 class PlyerScreen(Screen):
+    pass
+
+class KivyGardenScreen(Screen):
+    pass
+
+class KivyDesignerScreen(Screen):
     pass
 
 
@@ -56,6 +96,8 @@ class KivyPres(BoxLayout):
         self.content.add_widget(PyjniusScreen(name='Pyjnius'))
         self.content.add_widget(PyobjusScreen(name='Pyobjus'))
         self.content.add_widget(PlyerScreen(name='Plyer'))
+        self.content.add_widget(KivyGardenScreen(name='KivyGarden'))
+        self.content.add_widget(KivyDesignerScreen(name='KivyDesigner'))
 
         self.add_widget(self.content)
         self.add_widget(SlideMenu(root=self))
