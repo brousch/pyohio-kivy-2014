@@ -30,15 +30,15 @@ from kivy.uix.screenmanager import SlideTransition
 __version__ = '0.1.5'
 
 
-slides = ["Title", "WhatIsKivy", "MobileToolchain", "Pyjnius", "Pyobjus", 
-          "Plyer", "KivyGarden", "KivyDesigner"]
+slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid", 
+          "KivyIOs", "Buildozer", "Pyjnius", "Pyobjus", "Plyer", "KivyGarden", 
+          "KivyDesigner"]
 for slide in slides:
     kv_file = "{}.kv".format(slide.lower())
     Builder.load_file(os.path.join("slides", kv_file))
 
 class TitleScreen(Screen):
     def on_enter(self):
-        Clock.schedule_once(self._schedule_animations)
         Clock.schedule_interval(self._schedule_animations, 60)
     
     def _schedule_animations(self, dt):
@@ -100,17 +100,33 @@ class MobileToolchainScreen(Screen):
                  width=5)            
 
 
+class PythonForAndroidScreen(Screen):
+    pass
+
+
+class KivyIOsScreen(Screen):
+    pass
+
+
+class BuildozerScreen(Screen):
+    pass
+
+
 class PyjniusScreen(Screen):
     pass
+
 
 class PyobjusScreen(Screen):
     pass
 
+
 class PlyerScreen(Screen):
     pass
 
+
 class KivyGardenScreen(Screen):
     pass
+
 
 class KivyDesignerScreen(Screen):
     pass
@@ -124,6 +140,9 @@ class KivyPres(BoxLayout):
         self.content.add_widget(TitleScreen(name='Title'))
         self.content.add_widget(WhatIsKivyScreen(name='WhatIsKivy'))
         self.content.add_widget(MobileToolchainScreen(name="MobileToolchain"))
+        self.content.add_widget(PythonForAndroidScreen(name='PythonForAndroid'))
+        self.content.add_widget(KivyIOsScreen(name='KivyIOs'))
+        self.content.add_widget(BuildozerScreen(name='Buildozer'))
         self.content.add_widget(PyjniusScreen(name='Pyjnius'))
         self.content.add_widget(PyobjusScreen(name='Pyobjus'))
         self.content.add_widget(PlyerScreen(name='Plyer'))

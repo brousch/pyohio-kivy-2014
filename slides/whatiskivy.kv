@@ -3,10 +3,17 @@
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'What is Kivy?'
-        Label:
-            text: 'MIT-licensed Python library for the rapid development of applications that make use of innovative user interfaces, such as multi-touch apps.'
-        Label:
-            font_size: app.font_size_large
-            text: 'Supported Operating Systems'
-        Label:
-            text: 'Windows Vista, 7, 8.1\nOSX 10.7+\nLinux\nAndroid 2.3+\niOS'
+        Accordion:
+            AccordionItem:
+                VideoPlayer:
+                    source: os.path.join("videos", "gvr_pycon2014_keynote_kivy.mp4")
+            AccordionItem:
+                BoxLayout:
+                    Label:
+                        font_size: app.font_size_large
+                        text: 'Supported Operating Systems'
+                    Label:
+                        text: 'Windows Vista, 7, 8.1\nOSX 10.7+\nLinux\nAndroid 2.3+\niOS'
+            AccordionItem:
+                Label:
+                    text: 'MIT-licensed Python library for the rapid development of cross-platform applications that make use of innovative user interfaces, such as multi-touch apps.'
