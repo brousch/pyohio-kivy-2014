@@ -20,11 +20,14 @@ from kivy.graphics import Line
 from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import ObjectProperty
+from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.videoplayer import VideoPlayer
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
+
 
 
 __version__ = '0.1.5'
@@ -61,13 +64,12 @@ class TitleScreen(Screen):
         anim.start(widget)
 
 class WhatIsKivyScreen(Screen):
-    pass
+    def on_enter(self):
+        vp = VideoPlayer(source=os.path.join("videos",
+                                             "gvr_pycon2014_keynote_kivy.mp4"))
+        self.ids.video_ai.add_widget(vp)
 
-class MobileToolchainScreen(Screen):
-    
-    #def __init__(self, **kwargs):
-    #    super(MobileToolchainScreen, self).__init__(**kwargs)
-    
+class MobileToolchainScreen(Screen):    
     def on_enter(self):
         self._draw_tree()
 
