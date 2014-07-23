@@ -1,3 +1,5 @@
+#:import KivyLexer kivy.extras.highlight.KivyLexer
+
 <WhatIsKivyScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -6,9 +8,16 @@
         Accordion:
             id: accordion
             AccordionItem:
+                CodeInput:
+                    id: kv_demo
+                    lexer: KivyLexer()
+            AccordionItem:
+                id: min_app
+            AccordionItem:
                 id: video_ai
             AccordionItem:
                 BoxLayout:
+                    orientation: 'vertical'
                     Label:
                         font_size: app.font_size_large
                         text: 'Supported Operating Systems'

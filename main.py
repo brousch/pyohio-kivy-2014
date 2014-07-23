@@ -23,6 +23,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.codeinput import CodeInput
 from kivy.uix.videoplayer import VideoPlayer
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
@@ -39,6 +40,7 @@ slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid",
 for slide in slides:
     kv_file = "{}.kv".format(slide.lower())
     Builder.load_file(os.path.join("slides", kv_file))
+
 
 class TitleScreen(Screen):
     def on_enter(self):
@@ -63,11 +65,19 @@ class TitleScreen(Screen):
         anim = Animation(x=0, duration=4, transition='in_back')
         anim.start(widget)
 
+
 class WhatIsKivyScreen(Screen):
     def on_enter(self):
         vp = VideoPlayer(source=os.path.join("videos",
-                                             "gvr_pycon2014_keynote_kivy.mp4"))
+                                             "gvr_pycon2014_keynote_kivy.mp4"),
+                         options={'allow_stretch': True})
         self.ids.video_ai.add_widget(vp)
+        
+        with open(os.path.join("slides", "whatiskivy.kv"), 'r') as kv_file:
+            self.ids.kv_demo.text = kv_file.read()
+        
+        
+
 
 class MobileToolchainScreen(Screen):    
     def on_enter(self):
