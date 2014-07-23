@@ -12,6 +12,7 @@ Config.set('graphics', 'width', '1280')
 Config.set('graphics', 'height', '720')
 
 from kivy.app import App
+from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.graphics import Color
 from kivy.graphics import Line
@@ -140,8 +141,13 @@ class FloatingButton(Button):
             self.velocity[1] *= -1
     
     def _dock(self):
-        Clock.unschedule(self._update_pos)
-        self.center = self.dock_to.center
+        if not self.docked:
+            self.docked = True
+            Clock.unschedule(self._update_pos)
+            anim = Animation(x=self.dock_to.center_x - self.width / 2, 
+                             y=self.dock_to.center_y - self.height / 2,
+                             duration=2, t='out_elastic')
+            anim.start(self)
 
 
 Builder.load_file("slidemenu.kv")
