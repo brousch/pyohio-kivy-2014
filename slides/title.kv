@@ -1,13 +1,29 @@
+<TitleLabel@Label>:
+    size_hint_y: None
+    height: '80sp'
+
 <TitleScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        Label:
+    FloatLayout:
+        id: title_layout
+        size_hint: None, None
+        size: self.parent.size
+        TitleLabel:
+            id: title1
             font_size: app.font_size_xlarge
-            halign: 'center'
-            text: 'Getting Python\nAll Up in Your Mobile\nwith Kivy'
-        Label:
+            text: 'Getting Python'
+            center_y: title_layout.center_y + self.height
+        TitleLabel:
+            id: title2
             font_size: app.font_size_xlarge
-            halign: 'center'
+            text: 'All Up in Your Mobile'
+            center_y: title_layout.center_y
+        TitleLabel:
+            id: title3
+            font_size: app.font_size_xlarge
+            text: 'with Kivy'
+            center_y: title_layout.center_y - self.height
+        TitleLabel:
+            id: title4
+            font_size: app.font_size_xlarge
             italic: True
-            size_hint: 1, 0.3
             text: 'By Ben Rousch'

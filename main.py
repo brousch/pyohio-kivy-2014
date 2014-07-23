@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
+from functools import partial
 import os
 import random
 
@@ -36,7 +37,28 @@ for slide in slides:
     Builder.load_file(os.path.join("slides", kv_file))
 
 class TitleScreen(Screen):
-    pass
+    def on_enter(self):
+        Clock.schedule_once(self._schedule_animations)
+        Clock.schedule_interval(self._schedule_animations, 60)
+    
+    def _schedule_animations(self, dt):
+        Clock.schedule_once(partial(self._animate_title_out, self.ids.title1))
+        Clock.schedule_once(partial(self._animate_title_out, self.ids.title2), 1)
+        Clock.schedule_once(partial(self._animate_title_out, self.ids.title3), 2)
+        Clock.schedule_once(partial(self._animate_title_out, self.ids.title4), 3)
+        Clock.schedule_once(partial(self._animate_title_in, self.ids.title1), 4)
+        Clock.schedule_once(partial(self._animate_title_in, self.ids.title2), 5)
+        Clock.schedule_once(partial(self._animate_title_in, self.ids.title3), 6)
+        Clock.schedule_once(partial(self._animate_title_in, self.ids.title4), 7)
+    
+    def _animate_title_out(self, widget, dt):
+        anim = Animation(x=4000, duration=4, transition='out_back')
+        anim.start(widget)
+    
+    def _animate_title_in(self, widget, dt):
+        widget.x = -4000
+        anim = Animation(x=0, duration=4, transition='in_back')
+        anim.start(widget)
 
 class WhatIsKivyScreen(Screen):
     pass
@@ -146,7 +168,8 @@ class FloatingButton(Button):
             Clock.unschedule(self._update_pos)
             anim = Animation(x=self.dock_to.center_x - self.width / 2, 
                              y=self.dock_to.center_y - self.height / 2,
-                             duration=2, t='out_elastic')
+                             duration=2, 
+                             transition='out_elastic')
             anim.start(self)
 
 
