@@ -6,11 +6,13 @@
     source: os.path.join("images", "kivy-logo-black-256.png")
 
 <FloatingButton>:
-    docked: False
+    background_color: 1,1,1,0.9
+    background_normal: os.path.join("images", "white.png")
+    color: 0,0,0,0.9
     font_size: app.font_size_large
     size_hint: None, None
-    height: app.font_size_large * 1.5
-    width: len(self.text) / 2  * app.font_size_large
+    height: 100
+    width: 200
     on_press: self._dock()
 
 <MobileToolchainScreen>:
