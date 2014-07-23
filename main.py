@@ -138,6 +138,10 @@ class FloatingButton(Button):
             self.velocity[0] *= -1
         if self.y < 0 or (self.y + self.height) > self.parent.height:
             self.velocity[1] *= -1
+    
+    def _dock(self):
+        Clock.unschedule(self._update_pos)
+        self.center = self.dock_to.center
 
 
 Builder.load_file("slidemenu.kv")

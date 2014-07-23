@@ -11,6 +11,7 @@
     size_hint: None, None
     height: app.font_size_large * 1.5
     width: len(self.text) / 2  * app.font_size_large
+    on_press: self._dock()
 
 <MobileToolchainScreen>:
     BoxLayout:
@@ -41,23 +42,30 @@
                 id: ph_plyer
                 center: treelayout.center_x, self.height
             FloatingButton:
-                id: btn_kivy
-                text: "kivy"
-            FloatingButton:
-                id: btn_py4a
-                text: "python-for-android"
-            FloatingButton:
-                id: btn_kivyios
-                text: "kivy-ios"
-            FloatingButton:
-                id: btn_buildozer
-                text: "buildozer"
-            FloatingButton:
-                id: btn_pyjnius
-                text: "pyjnius"
+                id: btn_plyer
+                text: "plyer"
+                dock_to: ph_plyer
             FloatingButton:
                 id: btn_pyobjus
                 text: "pyobjus"
+                dock_to: ph_pyobjus
             FloatingButton:
-                id: btn_plyer
-                text: "plyer"
+                id: btn_pyjnius
+                text: "pyjnius"
+                dock_to: ph_pyjnius
+            FloatingButton:
+                id: btn_buildozer
+                text: "buildozer"
+                dock_to: ph_buildozer
+            FloatingButton:
+                id: btn_kivyios
+                text: "kivy-ios"
+                dock_to: ph_kivyios
+            FloatingButton:
+                id: btn_py4a
+                text: "python-for-android"
+                dock_to: ph_py4a
+            FloatingButton:
+                id: btn_kivy
+                text: "kivy"
+                dock_to: ph_kivy
