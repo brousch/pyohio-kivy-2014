@@ -5,11 +5,12 @@
     size_hint: None, None
     source: os.path.join("images", "kivy-logo-black-256.png")
 
-<FloatingButton@Button>:
+<FloatingButton>:
+    docked: False
     font_size: app.font_size_large
     size_hint: None, None
     height: app.font_size_large * 1.5
-    width: self.texture_size[0] + (app.font_size_large * 1.5)
+    width: len(self.text) / 2  * app.font_size_large
 
 <MobileToolchainScreen>:
     BoxLayout:
@@ -40,9 +41,23 @@
                 id: ph_plyer
                 center: treelayout.center_x, self.height
             FloatingButton:
+                id: btn_kivy
                 text: "kivy"
-                pos: 100,100
             FloatingButton:
+                id: btn_py4a
                 text: "python-for-android"
-                pos: 200,200
-
+            FloatingButton:
+                id: btn_kivyios
+                text: "kivy-ios"
+            FloatingButton:
+                id: btn_buildozer
+                text: "buildozer"
+            FloatingButton:
+                id: btn_pyjnius
+                text: "pyjnius"
+            FloatingButton:
+                id: btn_pyobjus
+                text: "pyobjus"
+            FloatingButton:
+                id: btn_plyer
+                text: "plyer"

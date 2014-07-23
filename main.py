@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import random
 
 import kivy
 kivy.require('1.8.0')
@@ -18,6 +19,7 @@ from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
@@ -39,6 +41,9 @@ class WhatIsKivyScreen(Screen):
     pass
 
 class MobileToolchainScreen(Screen):
+    
+    #def __init__(self, **kwargs):
+    #    super(MobileToolchainScreen, self).__init__(**kwargs)
     
     def on_enter(self):
         self._draw_tree()
@@ -69,7 +74,7 @@ class MobileToolchainScreen(Screen):
                  width=5)
             Line(points=[self.ids.ph_pyobjus.center_x, self.ids.ph_pyobjus.center_y, 
                          self.ids.ph_plyer.center_x, self.ids.ph_plyer.center_y],
-                 width=5)
+                 width=5)            
 
 
 class PyjniusScreen(Screen):
@@ -117,6 +122,22 @@ class KivyPres(BoxLayout):
     
     def set_transition(self, direction):
         self.content.transition = SlideTransition(direction=direction)
+
+
+class FloatingButton(Button):
+    def __init__(self, **kwargs):
+        super(FloatingButton, self).__init__(**kwargs)
+        self.velocity = [random.random(), random.random()]
+        Clock.schedule_interval(self._update_pos, 1/60.)
+    
+    def _update_pos(self, dt):
+        self.x += self.velocity[0]
+        self.y += self.velocity[1]
+        
+        if self.x < 0 or (self.x + self.width) > self.parent.width:
+            self.velocity[0] *= -1
+        if self.y < 0 or (self.y + self.height) > self.parent.height:
+            self.velocity[1] *= -1
 
 
 Builder.load_file("slidemenu.kv")
