@@ -76,8 +76,9 @@ class WhatIsKivyScreen(Screen):
         with open(os.path.join("slides", "whatiskivy.kv"), 'r') as kv_file:
             self.ids.kv_demo.text = kv_file.read()
         
+        with open("minimal_app.py", 'r') as py_file:
+            self.ids.min_app.text = py_file.read()
         
-
 
 class MobileToolchainScreen(Screen):    
     def on_enter(self):
@@ -162,7 +163,8 @@ class KivyPres(BoxLayout):
         self.content.add_widget(KivyDesignerScreen(name='KivyDesigner'))
 
         self.add_widget(self.content)
-        self.add_widget(SlideMenu(root=self))
+        self.slide_menu = SlideMenu(root=self)
+        self.add_widget(self.slide_menu)
         
     def get_current_slide(self):
         return self.content.current
@@ -173,6 +175,7 @@ class KivyPres(BoxLayout):
         else:
             self.set_transition('right')
         self.content.current = jump_to
+        self.slide_menu.ids.slide_spinner.text = ""
     
     def set_transition(self, direction):
         self.content.transition = SlideTransition(direction=direction)
@@ -202,6 +205,8 @@ class FloatingButton(Button):
                              duration=2, 
                              transition='out_elastic')
             anim.start(self)
+        else:
+            App.get_running_app().root.set_current_slide(self.screen)
 
 
 Builder.load_file("slidemenu.kv")
