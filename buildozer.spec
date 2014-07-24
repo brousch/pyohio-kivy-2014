@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = PyOhio Kivy Presentation 2014
+title = Kivy Presentation for PyOhio 2014
 
 # (str) Package name
 package.name = pyohiokivy2014
@@ -13,7 +13,7 @@ package.domain = net.clusterbleep
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,mp4,ttf
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -32,7 +32,7 @@ version.filename = %(source.dir)s/main.py
 # version = 1.2.0
 
 # (list) Application requirements
-requirements = kivy
+requirements = pygments,ffmpeg,kivy
 
 # (list) Garden requirements
 #garden_requirements =
@@ -67,10 +67,10 @@ fullscreen = 1
 #android.sdk = 21
 
 # (str) Android NDK version to use
-#android.ndk = 9c
+android.ndk = 9d
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
-#android.private_storage = True
+android.private_storage = False
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path =
