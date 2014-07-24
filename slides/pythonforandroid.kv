@@ -3,5 +3,190 @@
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'Python for Android'
-        Label:
-            text: 'Compiles Python code to an APK for Android.'
+        TabbedPanel:
+            do_default_tab: False
+            tab_width: self.parent.width / (len(self.tab_list) + 1)
+            TabbedPanelItem:
+                text: "Intro"
+                Label:
+                    text: "Py4A is a Linux command line tool for compiling your Python code into an Android APK."
+            TabbedPanelItem:
+                text: "Installation"
+                BoxLayout:
+                    orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install a compiler, patch, git, ccache, python-dev, and cython"
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install 32bit libs (if on 64bit OS)"
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install Android Tools"
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install Android SDK"
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install Android NDK"
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            id: cb_ant
+                            size_hint: None, None
+                            on_active: root.indic += (1 if self.active else -1)
+                        Label:
+                            text: "Install Apache Ant"
+                            halign: "left"
+                    Image:
+                        source: os.path.join("images", "red.png") if root.indic < 6 else os.path.join("images", "green.png")
+                        allow_stretch: True
+                        keep_ratio: False
+            TabbedPanelItem:
+                text: "Configuration"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Set the following environment variables"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: config_progress.value += (1 if self.active else -1)
+                        Label:
+                            text: 'export ANDROIDSDK="/path/to/SDK"'
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: config_progress.value += (1 if self.active else -1)
+                        Label:
+                            text: 'export ANDROIDNDK="/path/to/NDK"'
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: config_progress.value += (1 if self.active else -1)
+                        Label:
+                            text: 'export ANDROIDNDKVER=r9d'
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: config_progress.value += (1 if self.active else -1)
+                        Label:
+                            text: 'export ANDROIDAPI=23'
+                            halign: "left"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CheckBox:
+                            size_hint: None, None
+                            on_active: config_progress.value += (1 if self.active else -1)
+                        Label:
+                            text: 'export PATH=$ANDROIDNDK:$ANDROIDSDK/platform-tools:$ANDROIDSDK/tools:$PATH'
+                            halign: "left"
+                    ProgressBar:
+                        id: config_progress
+                        max: 5
+            TabbedPanelItem:
+                text: "Distribution"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Create a "distribution" with Kivy and any 3rd party modules your app needs.'
+                    Label:
+                        text: 'The distribution includes Python and copies of your 3rd party modules ready for including in an APK.'
+                    Label:
+                        text: '$ cd python-for-android\n$ ./distribute.sh -m "requests pygments openssl pil ffmpeg kivy"'
+                        halign: 'left'
+                        color: 0,1,0,1
+                        font_name: os.path.join("fonts", "DroidSerif.ttf")
+            TabbedPanelItem:
+                text: "3rd Party"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Pure-Python modules will be automatically downloaded from PyPI and included.'
+                    Label:
+                        text: 'Modules with C-extensions require a "recipe" to help us compile it for Android.'
+            TabbedPanelItem:
+                text: "Package"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Create an APK with the files from the distribution and your app's code."
+                    Label:
+                        text: '$ cd dist/default\n$ ./build.py --package com.my.package --name myapp --version 1.0 --private path/to/my/app/code --orientation sensor --permission INTERNET --permission VIBRATE --ignore-path /path/to/files/to/ignore --icon /path/to/png --presplash /path/to/presplash/image --sdk 23 --minsdk 8 --meta-data com.google.android.maps.v2.API_KEY=YOURAPIKEY debug'
+                        halign: 'left'
+                        color: 0,1,0,1
+                        font_name: os.path.join("fonts", "DroidSerif.ttf")
+            TabbedPanelItem:
+                text: "Problems"
+                FloatLayout:
+                    Image:
+                        source: os.path.join("images", "gray.png") if root.sad < 4 else os.path.join("images", "dr_who.gif")
+                        allow_stretch: True
+                    BoxLayout:
+                        orientation: 'vertical'
+                        background: 
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            CheckBox:
+                                size_hint: None, None
+                                on_active: root.sad += (1 if self.active else -1)
+                            Label:
+                                text: "Tedious, finicky installation"
+                                halign: "left"
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            CheckBox:
+                                size_hint: None, None
+                                on_active: root.sad += (1 if self.active else -1)
+                            Label:
+                                text: "Tedious, finicky configuration"
+                                halign: "left"
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            CheckBox:
+                                size_hint: None, None
+                                on_active: root.sad += (1 if self.active else -1)
+                            Label:
+                                text: "Multiple steps to compile an APK"
+                                halign: "left"
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            CheckBox:
+                                size_hint: None, None
+                                on_active: root.sad += (1 if self.active else -1)
+                            Label:
+                                text: "Long, finicky command line arguments"
+                                halign: "left"
+                            

@@ -19,6 +19,7 @@ from kivy.graphics import Color
 from kivy.graphics import Line
 from kivy.lang import Builder
 from kivy.metrics import sp
+from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
 from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
@@ -114,7 +115,8 @@ class MobileToolchainScreen(Screen):
 
 
 class PythonForAndroidScreen(Screen):
-    pass
+    indic = NumericProperty(0)
+    sad = NumericProperty(0)
 
 
 class KivyIOsScreen(Screen):
