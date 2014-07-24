@@ -77,7 +77,7 @@ class WhatIsKivyScreen(Screen):
         with open(os.path.join("slides", "whatiskivy.kv"), 'r') as kv_file:
             self.ids.kv_demo.text = kv_file.read()
         
-        with open("minimal_app.py", 'r') as py_file:
+        with open("minimal_app.txt", 'r') as py_file:
             self.ids.min_app.text = py_file.read()
         
 
