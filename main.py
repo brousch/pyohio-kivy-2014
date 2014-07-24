@@ -21,15 +21,24 @@ from kivy.lang import Builder
 from kivy.metrics import sp
 from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
+from kivy.properties import StringProperty
 from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.codeinput import CodeInput
 from kivy.uix.popup import Popup
+from kivy.uix.scatter import Scatter
 from kivy.uix.videoplayer import VideoPlayer
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
+
+from plyer.utils import platform
+
+if platform == 'android':
+    from jnius import autoclass, cast
+    PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    activity = PythonActivity.mActivity
 
 
 __version__ = '0.1.5'
@@ -135,7 +144,48 @@ class BuildozerScreen(Screen):
 
 
 class PyjniusScreen(Screen):
-    pass
+    acc_x = StringProperty("N/A")
+    acc_y = StringProperty("N/A")
+    acc_z = StringProperty("N/A")
+    battery_charging = StringProperty("N/A")
+    battery_percent = StringProperty("N/A")
+    latitude = StringProperty("N/A")
+    longitude = StringProperty("N/A")
+    
+    
+    def __init__(self, **kwargs):
+        super(PyjniusScreen, self).__init__(**kwargs)
+        if platform == 'android':
+            Intent = autoclass('android.content.Intent')
+            BatteryManager = autoclass('android.os.BatteryManager')
+            IntentFilter = autoclass('android.content.IntentFilter')
+    
+    def on_enter(self):
+        if platform == 'android':
+            Clock.schedule_interval(self._get_battery_status, 5)
+    
+    def _get_battery_status(self, dt=0):
+        status = {"connected": None, "percentage": None}
+
+        ifilter = self.IntentFilter(self.Intent.ACTION_BATTERY_CHANGED)
+
+        batteryStatus = cast('android.content.Intent',
+            activity.registerReceiver(None, ifilter))
+
+        query = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_STATUS, -1)
+        isCharging = (query == self.BatteryManager.BATTERY_STATUS_CHARGING or
+                      query == self.BatteryManager.BATTERY_STATUS_FULL)
+
+        level = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_LEVEL, -1)
+        scale = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_SCALE, -1)
+        percentage = level / float(scale)
+
+        self.battery_charging = "Charging" if isCharging else "Not Charging"
+        self.battery_percent = "{}%".format(percentage)
+
+
+def instance():
+    return AndroidBattery()
 
 
 class PyobjusScreen(Screen):

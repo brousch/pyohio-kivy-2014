@@ -1,7 +1,92 @@
+<GadgetScatter@Scatter>
+    auto_bring_to_front: True
+    size_hint: None, None
+    size: '200sp', '100sp'
+    
+    
+<GadgetBox@BoxLayout>:
+    title: ""
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgb: 0.25, 0.25, 0.25
+        Rectangle: 
+            pos: self.pos 
+            size: self.size
+    Label:
+        text: root.title
+
+
 <PyjniusScreen>:
     BoxLayout:
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'Pyjnius'
         Label:
-            text: 'A Python wrapper for Java classes.\nGives you access to most of the Android Java API'
+            size_hint_y: 0.25
+            text: 'A Python wrapper for Java classes, which gives you access to most of the Android Java API'
+        FloatLayout:
+            id: gadget_layout
+            GadgetScatter:
+                center: gadget_layout.width / 4., (gadget_layout.height / 3.) * 2
+                GadgetBox:
+                    title: "Battery Status"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Label:
+                            text: root.battery_charging
+                        Label:
+                            text: root.battery_percent
+            GadgetScatter:
+                center: gadget_layout.width / 2., (gadget_layout.height / 3.) * 2
+                GadgetBox:
+                    title: 'GPS'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Label:
+                            text: root.latitude
+                        Label:
+                            text: root.latitude
+            GadgetScatter:
+                center: (gadget_layout.width / 4.) * 3, (gadget_layout.height / 3.) * 2
+                GadgetBox:
+                    title: 'Accelerometer'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Label:
+                            text: root.acc_x
+                        Label:
+                            text: root.acc_y
+                        Label:
+                            text: root.acc_z
+            GadgetScatter:
+                center: gadget_layout.width / 4., gadget_layout.height / 3.
+                GadgetBox:
+                    title: 'Text To Speech'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        TextInput:
+                            text: "Type something here"
+                        Button:
+                            text: "Say It"
+            GadgetScatter:
+                center: gadget_layout.width / 2., gadget_layout.height / 3.
+                GadgetBox:
+                    title: 'Notifications'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        TextInput:
+                            text: "Type message here"
+                        Button:
+                            text: "Send notification"
+            GadgetScatter:
+                center: (gadget_layout.width / 4.) * 3, gadget_layout.height / 3.
+                GadgetBox:
+                    title: 'Take a Photo'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Button:
+                            text: "Take photo"
+                        Image:
+                            source: os.path.join("images", "gray.png")
+                            size: '100sp', '50sp'
