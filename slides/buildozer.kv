@@ -1,7 +1,144 @@
+<PlusLabel@Label>:
+    canvas.before:
+        Color:
+            rgb: 0, 0.5, 0
+        Rectangle: 
+            pos: self.pos 
+            size: self.size
+
+
+<MinusLabel@Label>:
+    canvas.before:
+        Color:
+            rgb: 0.5, 0, 0
+        Rectangle: 
+            pos: self.pos 
+            size: self.size
+
+
+<ComparisonPopup1@Popup>:
+    size_hint: 0.85, 0.85
+    title: "Py4A vs Buildozer"
+    title_size: app.font_size_large
+    GridLayout:
+        cols: 2
+        spacing: '4sp'
+        Label:
+            bold: True
+            text: 'Py4A'
+        Label:
+            bold: True
+            text: 'Buildozer'
+        MinusLabel:
+            text: "Pre-reqs: a compiler, patch, git, ccache, python-dev, cython, (32bit libs)"
+        MinusLabel:
+            text: "Pre-reqs: a compiler, patch, git, ccache, python-dev, cython, (32bit libs)"
+        MinusLabel:
+            text: "Git clone python-for-android"
+        PlusLabel:
+            text: "Pip install buildozer"
+        MinusLabel:
+            text: "Download and install Android tools manually"
+        PlusLabel:
+            text: "Android tools downloaded and installed automatically"
+        MinusLabel:
+            text: "Download and install Android SDK manually"
+        PlusLabel:
+            text: "SDK downloaded and installed automatically"
+        MinusLabel:
+            text: "Download and install Android NDK manually"
+        PlusLabel:
+            text: "NDK downloaded and installed automatically"
+        MinusLabel:
+            text: "Install Apache Ant manually"
+        PlusLabel:
+            text: "Ant downloaded and installed automatically"
+        MinusLabel:
+            text: "Set a bunch of environment variables"
+        PlusLabel:
+            text: "Edit a single, well commented spec file"
+
+
+<ComparisonPopup2@Popup>:
+    size_hint: 0.85, 0.85
+    title: "Py4A vs Buildozer"
+    title_size: app.font_size_large
+    GridLayout:
+        cols: 2
+        spacing: '4sp'
+        Label:
+            bold: True
+            text: 'Py4A'
+        Label:
+            bold: True
+            text: 'Buildozer'
+        MinusLabel:
+            text: 'Seperate step to create distribution\n$ ./distribute.sh -m "requests pygments openssl pil ffmpeg kivy"'
+        PlusLabel:
+            text: "Distribution created automatically"
+        ScrollView:
+            do_scroll_x: False
+            MinusLabel:
+                text_size: self.size
+                size_hint_y: None
+                height: self.texture_size[1]
+                text: 'Complicated packaging command\n$ ./build.py --package com.my.package --name myapp --version 1.0 --private path/to/my/app/code --orientation sensor --permission INTERNET --permission VIBRATE --ignore-path /path/to/files/to/ignore --icon /path/to/png --presplash /path/to/presplash/image --sdk 23 --minsdk 8 --meta-data com.google.android.maps.v2.API_KEY=YOURAPIKEY debug'
+        PlusLabel:
+            text: "Single, simple command to create package\n$ buildozer android debug"
+        MinusLabel:
+            text: "Use Android tools to deploy APK\n$ adb install path/to/apk"
+        PlusLabel:
+            text: "Deploy command included\n$ buildozer android debug install"
+        ScrollView:
+            do_scroll_x: False
+            MinusLabel:
+                text_size: self.size
+                size_hint_y: None
+                height: self.texture_size[1]
+                text: "Use Android tools to run APK\n$ adb shell am start -n com.my.package/android.entrypoint -a org.renpy.android.PythonActivity"
+        PlusLabel:
+            text: "Run command included\n$ buildozer android debug install run"
+        Label:
+            text: ""
+        PlusLabel:
+            text: "Alternative deployement method: serve"
+
+
+<FuturePopup@Popup>:
+    size_hint: 0.85, 0.85
+    title: "The Future of Buildozer"
+    title_size: app.font_size_large
+    BoxLayout:
+        orientation: 'horizontal'
+        Image:
+            source: os.path.join("images", "great_scott.jpg")
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'iOS Packaging Support'
+            Label:
+                text: 'Windows Packaging Support'
+            Label:
+                text: 'OSX Packaging Support'
+            Label:
+                text: 'Linux (deb and rpm) Packaging Support'
+
+        
+
+
 <BuildozerScreen>:
     BoxLayout:
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'Buildozer'
         Label:
-            text: 'An easy to use wrapper for python-for-android (and soon kivy-ios).'
+            text: 'An easy-to-use command line tool for packaging your Kivy apps.'
+        Button:
+            text: 'Compare Py4A to Buildozer:\nInstall and Configure'
+            on_press: root.open_comparisonpopup1()
+        Button:
+            text: 'Compare Py4A to Buildozer:\nPackage, Deploy, and Run'
+            on_press: root.open_comparisonpopup2()
+        Button:
+            text: 'The Future'
+            on_press: root.open_futurepopup()

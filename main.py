@@ -25,11 +25,11 @@ from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.codeinput import CodeInput
+from kivy.uix.popup import Popup
 from kivy.uix.videoplayer import VideoPlayer
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
-
 
 
 __version__ = '0.1.5'
@@ -124,7 +124,14 @@ class KivyIOsScreen(Screen):
 
 
 class BuildozerScreen(Screen):
-    pass
+    def open_comparisonpopup1(self):
+        pop = ComparisonPopup1().open()
+        
+    def open_comparisonpopup2(self):
+        pop = ComparisonPopup2().open()
+        
+    def open_futurepopup(self):
+        pop = FuturePopup().open()
 
 
 class PyjniusScreen(Screen):
@@ -209,6 +216,16 @@ class FloatingButton(Button):
             anim.start(self)
         else:
             App.get_running_app().root.set_current_slide(self.screen)
+
+
+class ComparisonPopup1(Popup):
+    pass
+
+class ComparisonPopup2(Popup):
+    pass
+
+class FuturePopup(Popup):
+    pass
 
 
 Builder.load_file("slidemenu.kv")
