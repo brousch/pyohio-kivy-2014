@@ -1,9 +1,76 @@
+<FeatureLabel@Label>:
+    canvas.before:
+        Color:
+            rgb: 0.5, 0.5, 0.5
+        Rectangle:
+            source: os.path.join("images", "congruent_outline.png")
+            pos: self.pos 
+            size: self.size
+            
+            
 <PlyerScreen>:
     BoxLayout:
         orientation: 'vertical'
         SlideTitleLabel:
             text: 'Plyer - Platform Abstraction Layer'
-        Label:
-            text: 'Provides a Pythonic platform-independant API to call device-specific APIs'
-        Label:
-            text: 'Accelerometer\nCamera\nGPS\nNotifications\nText to Speech\nSend Email\nVibrator'
+        TabbedPanel:
+            do_default_tab: False
+            tab_width: self.parent.width / (len(self.tab_list) + 1)
+            TabbedPanelItem:
+                text: "Intro"
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: '4sp'
+                    Label:
+                        size_hint_y: 0.1
+                        text: 'Plyer provides a Pythonic platform-independant API to call device-specific APIs'
+                    FeatureLabel:
+                        size_hint_y: 0.1
+                        text: 'Current Plyer APIs include:'
+                    GridLayout:
+                        cols: 3
+                        spacing: '4sp'
+                        FeatureLabel:
+                            text: 'Accelerometer'
+                        FeatureLabel:
+                            text: 'Camera'
+                        FeatureLabel:
+                            text: 'GPS'
+                        FeatureLabel:
+                            text: 'Notifications'
+                        FeatureLabel:
+                            text: 'Text to Speech'
+                        FeatureLabel:
+                            text: 'Open Email'
+                        FeatureLabel:
+                            text: 'Vibrator'
+                        FeatureLabel:
+                            text: 'Send SMS'
+                        FeatureLabel:
+                            text: 'Compass'
+                        FeatureLabel:
+                            text: 'Unique Device ID'
+                        FeatureLabel:
+                            text: 'Gyroscope'
+                        FeatureLabel:
+                            text: 'Battery Status'
+            TabbedPanelItem:
+                text: "Battery Status"
+                BoxLayout:
+                    orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        Label:
+                            text: 'Pyjnius'
+                        Label:
+                            size_hint_x: 0.1
+                            text: 'vs'
+                        Label:
+                            text: 'Plyer'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CodeInput:
+                            id: comp_battery_pyjnius
+                        CodeInput:
+                            id: comp_battery_plyer

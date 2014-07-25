@@ -1,0 +1,4 @@
+from plyer import Battery
+
+def get_battery_status(self):
+    return Battery.status

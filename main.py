@@ -26,6 +26,7 @@ from kivy.uix.accordion import AccordionItem
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.codeinput import CodeInput
+from kivy.uix.image import Image
 from kivy.uix.popup import Popup
 from kivy.uix.scatter import Scatter
 from kivy.uix.videoplayer import VideoPlayer
@@ -86,7 +87,7 @@ class WhatIsKivyScreen(Screen):
         with open(os.path.join("slides", "whatiskivy.kv"), 'r') as kv_file:
             self.ids.kv_demo.text = kv_file.read()
         
-        with open("minimal_app.txt", 'r') as py_file:
+        with open(os.path.join("snippets", "minimal_app.txt"), 'r') as py_file:
             self.ids.min_app.text = py_file.read()
         
 
@@ -129,7 +130,13 @@ class PythonForAndroidScreen(Screen):
 
 
 class KivyIOsScreen(Screen):
-    pass
+    def on_enter(self):
+        screenshots = ["2048", "angryblocks", "numberlane", "processcraft", 
+                       "quizzn"]
+        for ss in screenshots:
+            src = os.path.join("images", "ios_ss_{}.jpeg".format(ss))
+            image = Image(source=src, allow_stretch=True)
+            self.ids.ios_gallery.add_widget(image)
 
 
 class BuildozerScreen(Screen):
@@ -193,7 +200,11 @@ class PyobjusScreen(Screen):
 
 
 class PlyerScreen(Screen):
-    pass
+    def on_enter(self):
+        with open(os.path.join("snippets", "comp_battery_pyjnius.txt"), 'r') as file1:
+            self.ids.comp_battery_pyjnius.text = file1.read()
+        with open(os.path.join("snippets", "comp_battery_plyer.txt"), 'r') as file2:
+            self.ids.comp_battery_plyer.text = file2.read()
 
 
 class KivyGardenScreen(Screen):

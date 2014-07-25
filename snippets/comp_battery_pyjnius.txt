@@ -1,0 +1,32 @@
+if platform == 'android':
+    from jnius import autoclass, cast
+    PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    activity = PythonActivity.mActivity
+    
+    Intent = autoclass('android.content.Intent')
+    BatteryManager = autoclass('android.os.BatteryManager')
+    IntentFilter = autoclass('android.content.IntentFilter')
+
+def get_battery_status(self):
+    status = {"connected": None, "percentage": None}
+
+    ifilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+
+    batteryStatus = cast('android.content.Intent',
+        activity.registerReceiver(None, ifilter))
+
+    query = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+    isCharging = (query == BatteryManager.BATTERY_STATUS_CHARGING or
+                  query == BatteryManager.BATTERY_STATUS_FULL)
+
+    level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+    scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+    percentage = level / float(scale)
+
+    self.battery_charging = "Charging" if isCharging else "Not Charging"
+    self.battery_percent = "{}%".format(percentage)
+    
+	status['connected'] = isCharging
+    status['percentage'] = percentage
+
+    return status
