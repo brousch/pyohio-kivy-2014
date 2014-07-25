@@ -72,8 +72,13 @@
         Label:
             bold: True
             text: 'Buildozer'
-        MinusLabel:
-            text: 'Seperate step to create distribution\n$ ./distribute.sh -m "requests pygments openssl pil ffmpeg kivy"'
+        ScrollView:
+            do_scroll_x: False
+            MinusLabel:
+                text_size: self.size
+                size_hint_y: None
+                height: self.texture_size[1]
+                text: 'Seperate step to create distribution\n$ ./distribute.sh -m "requests pygments openssl pil ffmpeg kivy"'
         PlusLabel:
             text: "Distribution created automatically"
         ScrollView:

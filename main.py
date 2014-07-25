@@ -313,7 +313,7 @@ class SlideMenu(BoxLayout):
 
 
 class KivyPresApp(App):
-    font_size_regular = sp(24)
+    font_size_regular = sp(25)
     font_size_large = font_size_regular * 2
     font_size_xlarge = font_size_regular * 3
 
