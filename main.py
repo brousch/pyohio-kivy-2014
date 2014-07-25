@@ -188,15 +188,14 @@ class PyjniusScreen(Screen):
         percentage = level / float(scale)
 
         self.battery_charging = "Charging" if isCharging else "Not Charging"
-        self.battery_percent = "{}%".format(percentage)
-
-
-def instance():
-    return AndroidBattery()
+        self.battery_percent = "{}%".format(percentage*100)
 
 
 class PyobjusScreen(Screen):
-    pass
+    def on_enter(self):
+        with open(os.path.join("snippets", 
+                               "pyobjus_snippet.txt"), 'r') as py_file:
+            self.ids.pyobjus_snippet.text = py_file.read()
 
 
 class PlyerScreen(Screen):
