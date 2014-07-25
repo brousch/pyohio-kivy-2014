@@ -253,7 +253,7 @@ class KivyPres(BoxLayout):
 class FloatingButton(Button):
     def __init__(self, **kwargs):
         super(FloatingButton, self).__init__(**kwargs)
-        self.velocity = [random.random(), random.random()]
+        self.velocity = [random.random()*2, random.random()*2]
         Clock.schedule_interval(self._update_pos, 1/60.)
     
     def _update_pos(self, dt):
@@ -313,7 +313,7 @@ class SlideMenu(BoxLayout):
 
 
 class KivyPresApp(App):
-    font_size_regular = sp(20)
+    font_size_regular = sp(24)
     font_size_large = font_size_regular * 2
     font_size_xlarge = font_size_regular * 3
 
