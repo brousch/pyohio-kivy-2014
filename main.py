@@ -134,7 +134,7 @@ class KivyIOsScreen(Screen):
         screenshots = ["2048", "angryblocks", "numberlane", "processcraft", 
                        "quizzn"]
         for ss in screenshots:
-            src = os.path.join("images", "ios_ss_{}.jpeg".format(ss))
+            src = os.path.join("images", "ios_ss_{}.jpg".format(ss))
             image = Image(source=src, allow_stretch=True)
             self.ids.ios_gallery.add_widget(image)
 
@@ -163,9 +163,9 @@ class PyjniusScreen(Screen):
     def __init__(self, **kwargs):
         super(PyjniusScreen, self).__init__(**kwargs)
         if platform == 'android':
-            Intent = autoclass('android.content.Intent')
-            BatteryManager = autoclass('android.os.BatteryManager')
-            IntentFilter = autoclass('android.content.IntentFilter')
+            self.Intent = autoclass('android.content.Intent')
+            self.BatteryManager = autoclass('android.os.BatteryManager')
+            self.IntentFilter = autoclass('android.content.IntentFilter')
     
     def on_enter(self):
         if platform == 'android':
