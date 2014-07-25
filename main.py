@@ -42,7 +42,7 @@ if platform == 'android':
     activity = PythonActivity.mActivity
 
 
-__version__ = '0.1.5'
+__version__ = '0.2.0'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid", 
