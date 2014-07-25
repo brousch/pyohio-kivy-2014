@@ -32,7 +32,7 @@ version.filename = %(source.dir)s/main.py
 # version = 1.2.0
 
 # (list) Application requirements
-requirements = pygments,ffmpeg,kivy
+requirements = plyer==master,pygments,ffmpeg,kivy
 
 # (list) Garden requirements
 #garden_requirements =
