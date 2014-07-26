@@ -5,4 +5,4 @@ __all__ = ('open_url')
 if platform() == 'android': 
     from androidbrowser import open_url
 else:
-    from mockbrowser import open_url
+    from desktopbrowser import open_url
