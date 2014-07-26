@@ -37,6 +37,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 
 from libs import browser
+from plyer import accelerometer
 from plyer import battery
 from plyer import gps
 from plyer.utils import platform
@@ -162,6 +163,7 @@ class PyjniusScreen(Screen):
     def on_enter(self):
         Clock.schedule_interval(self._get_battery_status, 5)
         Clock.schedule_interval(self._get_gps, 10)
+        Clock.schedule_interval(self._get_accelerometer, 1/20)
     
     def _get_battery_status(self, dt=0):
         try:
@@ -190,6 +192,16 @@ class PyjniusScreen(Screen):
             gps.start()
         except NotImplementedError:
             Logger.info("GPS is not implemented on this platform.")
+    
+    def _get_accelerometer(self, dt):
+        try:
+            val = accelerometer.acceleration
+            self.acc_x = "X: " + str(val[0])
+            self.acc_y = "Y: " + str(val[1])
+            self.acc_z = "Z: " + str(val[2])
+        except NotImplementedError:
+            Logger.info("Accelerometer is not implemented on this platform.")
+        
 
 
 class PyobjusScreen(Screen):
@@ -327,7 +339,7 @@ class KivyPresApp(App):
         return KivyPres()
     
     def on_pause(self):
-        return true
+        return True
         
     def on_resume(self):
         pass
