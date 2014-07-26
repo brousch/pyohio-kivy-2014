@@ -15,6 +15,7 @@ Config.set('graphics', 'height', '720')
 from kivy.app import App
 from kivy.animation import Animation
 from kivy.clock import Clock
+from kivy.clock import mainthread
 from kivy.graphics import Color
 from kivy.graphics import Line
 from kivy.lang import Builder
@@ -37,6 +38,7 @@ from kivy.uix.screenmanager import SlideTransition
 
 from libs import browser
 from plyer import battery
+from plyer import gps
 from plyer.utils import platform
 
 
@@ -154,11 +156,12 @@ class PyjniusScreen(Screen):
     acc_z = StringProperty("N/A")
     battery_charging = StringProperty("N/A")
     battery_percent = StringProperty("N/A")
-    latitude = StringProperty("N/A")
-    longitude = StringProperty("N/A")
+    gps_location = StringProperty("N/A")
+    gps_status = StringProperty("N/A")
     
     def on_enter(self):
-        Clock.schedule_interval(self._get_battery_status, 1)
+        Clock.schedule_interval(self._get_battery_status, 5)
+        Clock.schedule_interval(self._get_gps, 10)
     
     def _get_battery_status(self, dt=0):
         try:
@@ -170,6 +173,23 @@ class PyjniusScreen(Screen):
             self.battery_percent = "{}%".format(status['percentage'])
         except NotImplementedError:
             Logger.info("Battery facade not implemented on this platform.")
+    
+    @mainthread
+    def _gps_on_location(self, **kwargs):
+        self.gps_location = '\n'.join([
+            '{}={}'.format(k, v) for k, v in kwargs.items()])
+
+    @mainthread
+    def _gps_on_status(self, stype, status):
+        self.gps_status = 'type={}\n{}'.format(stype, status)
+    
+    def _get_gps(self, dt=0):
+        try:
+            gps.configure(on_location=self._gps_on_location,
+                          on_status=self._gps_on_status)
+            gps.start()
+        except NotImplementedError:
+            Logger.info("GPS is not implemented on this platform.")
 
 
 class PyobjusScreen(Screen):
