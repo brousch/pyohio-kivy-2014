@@ -35,11 +35,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 
-from plyer.utils import platform
-from plyer import battery
-
 from libs import browser
-
+from libs.plyer.utils import platform
+from libs.plyer import battery
 
 
 __version__ = '0.2.2'
