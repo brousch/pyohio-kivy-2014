@@ -45,7 +45,7 @@ from plyer import tts
 from plyer.utils import platform
 
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid", 
@@ -164,7 +164,6 @@ class PyjniusScreen(Screen):
     
     def on_enter(self):
         Clock.schedule_interval(self._get_battery_status, 5)
-        Clock.schedule_interval(self._get_gps, 10)
         Clock.schedule_interval(self._get_accelerometer, 1/20)
     
     def _get_battery_status(self, dt=0):
@@ -178,24 +177,7 @@ class PyjniusScreen(Screen):
         except NotImplementedError:
             Logger.info("Battery facade not implemented on this platform.")
     
-    @mainthread
-    def _gps_on_location(self, **kwargs):
-        self.gps_location = '\n'.join([
-            '{}={}'.format(k, v) for k, v in kwargs.items()])
-
-    @mainthread
-    def _gps_on_status(self, stype, status):
-        self.gps_status = 'type={}\n{}'.format(stype, status)
-    
-    def _get_gps(self, dt=0):
-        try:
-            gps.configure(on_location=self._gps_on_location,
-                          on_status=self._gps_on_status)
-            gps.start()
-        except NotImplementedError:
-            Logger.info("GPS is not implemented on this platform.")
-    
-    def _get_accelerometer(self, dt):
+    def _get_accelerometer(self, dt=0):
         try:
             accelerometer.enable()
             val = accelerometer.acceleration
@@ -210,12 +192,6 @@ class PyjniusScreen(Screen):
             tts.speak(saythis)
         except NotImplementedError:
             Logger.info("Text to Speech is not implemented on this platform.")
-    
-    def _do_notify(self, message):
-        try:
-            notification.notify(title="PyOhio Message", message=message)
-        except NotImplementedError:
-            Logger.info("Notification is not implemented on this platform.")
 
 
 class PyobjusScreen(Screen):

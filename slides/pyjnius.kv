@@ -29,7 +29,7 @@
         FloatLayout:
             id: gadget_layout
             GadgetScatter:
-                center: gadget_layout.width / 4., (gadget_layout.height / 3.) * 2
+                center: gadget_layout.width / 4., (gadget_layout.height / 2.)
                 GadgetBox:
                     title: "Battery Status"
                     BoxLayout:
@@ -39,17 +39,7 @@
                         Label:
                             text: root.battery_percent
             GadgetScatter:
-                center: gadget_layout.width / 2., (gadget_layout.height / 3.) * 2
-                GadgetBox:
-                    title: 'GPS'
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        Label:
-                            text: root.gps_location
-                        Label:
-                            text: root.gps_status
-            GadgetScatter:
-                center: (gadget_layout.width / 4.) * 3, (gadget_layout.height / 3.) * 2
+                center: (gadget_layout.width / 2.), (gadget_layout.height / 2.)
                 GadgetBox:
                     title: 'Accelerometer'
                     BoxLayout:
@@ -61,7 +51,7 @@
                         Label:
                             text: root.acc_z
             GadgetScatter:
-                center: gadget_layout.width / 4., gadget_layout.height / 3.
+                center: (gadget_layout.width / 4.) * 3, (gadget_layout.height / 2.)
                 GadgetBox:
                     title: 'Text To Speech'
                     BoxLayout:
@@ -73,26 +63,3 @@
                             size_hint_x: 0.33
                             text: "Say It"
                             on_press: root._do_speak(say_this.text)
-            GadgetScatter:
-                center: gadget_layout.width / 2., gadget_layout.height / 3.
-                GadgetBox:
-                    title: 'Notifications'
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        TextInput:
-                            id: noti_msg
-                            text: "Type message here"
-                        Button:
-                            text: "Send Notification"
-                            on_press: root._do_notify(noti_msg.text)
-            GadgetScatter:
-                center: (gadget_layout.width / 4.) * 3, gadget_layout.height / 3.
-                GadgetBox:
-                    title: 'Take a Photo'
-                    BoxLayout:
-                        orientation: 'horizontal'
-                        Button:
-                            text: "Take photo"
-                        Image:
-                            source: os.path.join("images", "gray.png")
-                            size: '100sp', '50sp'

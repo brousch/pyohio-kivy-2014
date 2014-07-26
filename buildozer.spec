@@ -55,7 +55,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-android.permissions = WAKE_LOCK,ACCESS_FINE_LOCATION
+android.permissions = WAKE_LOCK
 
 # (int) Android API to use
 #android.api = 14
