@@ -1,0 +1,40 @@
+#:import os os
+
+<InformationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        SlideTitleLabel:
+            text: 'More Information'
+        GridLayout:
+            cols: 2
+            spacing: '4sp'
+            Label:
+                text: 'Ben Rousch (email)'
+            Label:
+                text: '<brousch@gmail.com>'
+            Label:
+                text: 'Ben Rousch (Twitter)'
+            Button:
+                text: '@brousch'
+                on_press: app.open_browser("http://twitter.com/brousch")
+            Label:
+                text: 'Kivy'
+            Button:
+                text: 'http://kivy.org/'
+                on_press: app.open_browser("http://kivy.org/")
+            Label:
+                text: 'Kivy Org Projects'
+            Button:
+                text: 'https://github.com/kivy'
+                on_press: app.open_browser("https://github.com/kivy")
+            Label:
+                text: 'Kivy Garden'
+            Button:
+                text: 'https://github.com/kivy-garden'
+                on_press: app.open_browser("https://github.com/kivy-garden")
+            Label:
+                text: 'Kivy Crash Course'
+            Button:
+                text: 'http://inclem.net/pages/kivy-crash-course/'
+                on_press: app.open_browser("http://inclem.net/pages/kivy-crash-course/")
+                

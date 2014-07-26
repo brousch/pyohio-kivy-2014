@@ -36,6 +36,8 @@ from kivy.uix.screenmanager import SlideTransition
 
 from plyer.utils import platform
 
+from libs import browser
+
 if platform == 'android':
     from jnius import autoclass, cast
     PythonActivity = autoclass('org.renpy.android.PythonActivity')
@@ -47,7 +49,7 @@ __version__ = '0.2.1'
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid", 
           "KivyIOs", "Buildozer", "Pyjnius", "Pyobjus", "Plyer", "KivyGarden", 
-          "KivyDesigner"]
+          "KivyDesigner", "Information"]
 for slide in slides:
     kv_file = "{}.kv".format(slide.lower())
     Builder.load_file(os.path.join("slides", kv_file))
@@ -214,6 +216,10 @@ class KivyDesignerScreen(Screen):
     pass
 
 
+class InformationScreen(Screen):
+    pass
+
+
 class KivyPres(BoxLayout):
     def __init__(self, **kwargs):
         super(KivyPres, self).__init__(**kwargs)
@@ -230,6 +236,7 @@ class KivyPres(BoxLayout):
         self.content.add_widget(PlyerScreen(name='Plyer'))
         self.content.add_widget(KivyGardenScreen(name='KivyGarden'))
         self.content.add_widget(KivyDesignerScreen(name='KivyDesigner'))
+        self.content.add_widget(InformationScreen(name='Information'))
 
         self.add_widget(self.content)
         self.slide_menu = SlideMenu(root=self)
@@ -325,6 +332,9 @@ class KivyPresApp(App):
         
     def on_resume(self):
         pass
+    
+    def open_browser(self, url):
+        browser.open_url(url)
 
 
 if __name__ == '__main__':
