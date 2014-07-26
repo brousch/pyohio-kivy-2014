@@ -40,11 +40,12 @@ from libs import browser
 from plyer import accelerometer
 from plyer import battery
 from plyer import gps
+from plyer import notification
 from plyer import tts
 from plyer.utils import platform
 
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 
 slides = ["Title", "WhatIsKivy", "MobileToolchain", "PythonForAndroid", 
@@ -209,6 +210,12 @@ class PyjniusScreen(Screen):
             tts.speak(saythis)
         except NotImplementedError:
             Logger.info("Text to Speech is not implemented on this platform.")
+    
+    def _do_notify(self, message):
+        try:
+            notification.notify(title="PyOhio Message", message=message)
+        except NotImplementedError:
+            Logger.info("Notification is not implemented on this platform.")
 
 
 class PyobjusScreen(Screen):

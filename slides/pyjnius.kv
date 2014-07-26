@@ -80,9 +80,11 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         TextInput:
+                            id: noti_msg
                             text: "Type message here"
                         Button:
-                            text: "Send notification"
+                            text: "Send Notification"
+                            on_press: root._do_notify(noti_msg.text)
             GadgetScatter:
                 center: (gadget_layout.width / 4.) * 3, gadget_layout.height / 3.
                 GadgetBox:
