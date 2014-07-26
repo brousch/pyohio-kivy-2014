@@ -195,6 +195,7 @@ class PyjniusScreen(Screen):
     
     def _get_accelerometer(self, dt):
         try:
+            accelerometer.enable()
             val = accelerometer.acceleration
             self.acc_x = "X: " + str(val[0])
             self.acc_y = "Y: " + str(val[1])
