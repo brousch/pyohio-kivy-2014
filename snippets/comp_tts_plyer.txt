@@ -1,0 +1,4 @@
+from plyer import tts
+
+def do_speak(saythis):
+	tts.speak(saythis)

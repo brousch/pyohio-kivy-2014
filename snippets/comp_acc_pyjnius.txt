@@ -1,0 +1,28 @@
+if platform == 'android':
+    from jnius import autoclass, cast
+    PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    activity = PythonActivity.mActivity
+	from jnius import PythonJavaClass, java_method, autoclass, cast
+
+	Context = autoclass('android.content.Context')
+	Sensor = autoclass('android.hardware.Sensor')
+	SensorManager = autoclass('android.hardware.SensorManager')
+
+    __javainterfaces__ = ['android/hardware/SensorEventListener']
+
+values = [0, 0, 0]
+
+def get_accelerometer(self):
+	SensorManager = cast('android.hardware.SensorManager',
+                    activity.getSystemService(Context.SENSOR_SERVICE))
+    sensor = SensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    SensorManager.registerListener(sensor, SensorManager.SENSOR_DELAY_NORMAL)
+    return values
+
+@java_method('()I')
+def hashCode():
+    return id()
+
+@java_method('(Landroid/hardware/SensorEvent;)V')
+def onSensorChanged(event):
+    values = event.values[:3]

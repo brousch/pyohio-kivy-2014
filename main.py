@@ -207,6 +207,14 @@ class PlyerScreen(Screen):
             self.ids.comp_battery_pyjnius.text = file1.read()
         with open(os.path.join("snippets", "comp_battery_plyer.txt"), 'r') as file2:
             self.ids.comp_battery_plyer.text = file2.read()
+        with open(os.path.join("snippets", "comp_acc_pyjnius.txt"), 'r') as file3:
+            self.ids.comp_acc_pyjnius.text = file3.read()
+        with open(os.path.join("snippets", "comp_acc_plyer.txt"), 'r') as file4:
+            self.ids.comp_acc_plyer.text = file4.read()
+        with open(os.path.join("snippets", "comp_tts_pyjnius.txt"), 'r') as file5:
+            self.ids.comp_tts_pyjnius.text = file5.read()
+        with open(os.path.join("snippets", "comp_tts_plyer.txt"), 'r') as file6:
+            self.ids.comp_tts_plyer.text = file6.read()
 
 
 class KivyGardenScreen(Screen):

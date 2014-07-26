@@ -1,0 +1,5 @@
+from plyer import accelerometer
+
+def get_accelerometer():
+	accelerometer.enable()
+    return accelerometer.acceleration

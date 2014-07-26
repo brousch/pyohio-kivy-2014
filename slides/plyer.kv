@@ -74,3 +74,43 @@
                             id: comp_battery_pyjnius
                         CodeInput:
                             id: comp_battery_plyer
+            TabbedPanelItem:
+                text: "Accelerometer"
+                BoxLayout:
+                    orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        Label:
+                            text: 'Pyjnius'
+                        Label:
+                            size_hint_x: 0.1
+                            text: 'vs'
+                        Label:
+                            text: 'Plyer'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CodeInput:
+                            id: comp_acc_pyjnius
+                        CodeInput:
+                            id: comp_acc_plyer
+            TabbedPanelItem:
+                text: "Text to Speech"
+                BoxLayout:
+                    orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: 0.1
+                        Label:
+                            text: 'Pyjnius'
+                        Label:
+                            size_hint_x: 0.1
+                            text: 'vs'
+                        Label:
+                            text: 'Plyer'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        CodeInput:
+                            id: comp_tts_pyjnius
+                        CodeInput:
+                            id: comp_tts_plyer

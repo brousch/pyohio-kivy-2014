@@ -1,0 +1,12 @@
+if platform == 'android':
+    from jnius import autoclass, cast
+    PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    activity = PythonActivity.mActivity
+    
+	Locale = autoclass('java.util.Locale')
+	TextToSpeech = autoclass('android.speech.tts.TextToSpeech')
+
+def do_speak(saythis):
+    tts = TextToSpeech(activity, None)
+    tts.setLanguage(Locale.US)
+    tts.speak(saythis.encode('utf-8'), TextToSpeech.QUEUE_FLUSH, None) == -1:
