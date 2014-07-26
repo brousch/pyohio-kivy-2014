@@ -197,9 +197,9 @@ class PyjniusScreen(Screen):
         try:
             accelerometer.enable()
             val = accelerometer.acceleration
-            self.acc_x = "X: " + str(val[0])
-            self.acc_y = "Y: " + str(val[1])
-            self.acc_z = "Z: " + str(val[2])
+            self.acc_x = "X: {0:.3f}".format(val[0])
+            self.acc_y = "Y: {0:.3f}".format(val[1])
+            self.acc_z = "Z: {0:.3f}".format(val[2])
         except NotImplementedError:
             Logger.info("Accelerometer is not implemented on this platform.")
         
