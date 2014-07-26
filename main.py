@@ -40,6 +40,7 @@ from libs import browser
 from plyer import accelerometer
 from plyer import battery
 from plyer import gps
+from plyer import tts
 from plyer.utils import platform
 
 
@@ -197,12 +198,17 @@ class PyjniusScreen(Screen):
         try:
             accelerometer.enable()
             val = accelerometer.acceleration
-            self.acc_x = "X: {0:.3f}".format(val[0])
-            self.acc_y = "Y: {0:.3f}".format(val[1])
-            self.acc_z = "Z: {0:.3f}".format(val[2])
+            self.acc_x = "X: {0:.2f}".format(val[0])
+            self.acc_y = "Y: {0:.2f}".format(val[1])
+            self.acc_z = "Z: {0:.2f}".format(val[2])
         except NotImplementedError:
             Logger.info("Accelerometer is not implemented on this platform.")
-        
+    
+    def _do_speak(self, saythis):
+        try:
+            tts.speak(saythis)
+        except NotImplementedError:
+            Logger.info("Text to Speech is not implemented on this platform.")
 
 
 class PyobjusScreen(Screen):

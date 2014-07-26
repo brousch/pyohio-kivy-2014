@@ -67,9 +67,12 @@
                     BoxLayout:
                         orientation: 'horizontal'
                         TextInput:
-                            text: "Type something here"
+                            id: say_this
+                            text: "Type here"
                         Button:
+                            size_hint_x: 0.33
                             text: "Say It"
+                            on_press: root._do_speak(say_this.text)
             GadgetScatter:
                 center: gadget_layout.width / 2., gadget_layout.height / 3.
                 GadgetBox:
