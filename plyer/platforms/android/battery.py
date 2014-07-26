@@ -25,7 +25,7 @@ class AndroidBattery(Battery):
         percentage = level / float(scale)
 
         status['connected'] = isCharging
-        status['percentage'] = percentage
+        status['percentage'] = percentage * 100
 
         return status
 
