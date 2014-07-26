@@ -162,13 +162,13 @@ class PyjniusScreen(Screen):
     
     def _get_battery_status(self, dt=0):
         try:
-            status = battery.Battery.status
+            status = battery.status
             if status['connected']:
                 self.battery_charging = "Charging"
             else:
                 self.battery_charging = "Not Charging"
-            self.battery_percent = "{}%".format(status['percentage']*100)
-        except:
+            self.battery_percent = "{}%".format(status['percentage'])
+        except NotImplementedError:
             Logger.info("Battery facade not implemented on this platform.")
 
 
