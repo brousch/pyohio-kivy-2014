@@ -18,6 +18,7 @@ from kivy.clock import Clock
 from kivy.graphics import Color
 from kivy.graphics import Line
 from kivy.lang import Builder
+from kivy.logger import Logger
 from kivy.metrics import sp
 from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
@@ -35,13 +36,10 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 
 from plyer.utils import platform
+from plyer import battery
 
 from libs import browser
 
-if platform == 'android':
-    from jnius import autoclass, cast
-    PythonActivity = autoclass('org.renpy.android.PythonActivity')
-    activity = PythonActivity.mActivity
 
 
 __version__ = '0.2.2'
@@ -161,36 +159,19 @@ class PyjniusScreen(Screen):
     latitude = StringProperty("N/A")
     longitude = StringProperty("N/A")
     
-    
-    def __init__(self, **kwargs):
-        super(PyjniusScreen, self).__init__(**kwargs)
-        if platform == 'android':
-            self.Intent = autoclass('android.content.Intent')
-            self.BatteryManager = autoclass('android.os.BatteryManager')
-            self.IntentFilter = autoclass('android.content.IntentFilter')
-    
     def on_enter(self):
-        if platform == 'android':
-            Clock.schedule_interval(self._get_battery_status, 5)
+        Clock.schedule_interval(self._get_battery_status, 1)
     
     def _get_battery_status(self, dt=0):
-        status = {"connected": None, "percentage": None}
-
-        ifilter = self.IntentFilter(self.Intent.ACTION_BATTERY_CHANGED)
-
-        batteryStatus = cast('android.content.Intent',
-            activity.registerReceiver(None, ifilter))
-
-        query = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_STATUS, -1)
-        isCharging = (query == self.BatteryManager.BATTERY_STATUS_CHARGING or
-                      query == self.BatteryManager.BATTERY_STATUS_FULL)
-
-        level = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_LEVEL, -1)
-        scale = batteryStatus.getIntExtra(self.BatteryManager.EXTRA_SCALE, -1)
-        percentage = level / float(scale)
-
-        self.battery_charging = "Charging" if isCharging else "Not Charging"
-        self.battery_percent = "{}%".format(percentage*100)
+        try:
+            status = battery.Battery.status
+            if status['connected']:
+                self.battery_charging = "Charging"
+            else:
+                self.battery_charging = "Not Charging"
+            self.battery_percent = "{}%".format(status['percentage']*100)
+        except:
+            Logger.info("Battery facade not implemented on this platform.")
 
 
 class PyobjusScreen(Screen):
